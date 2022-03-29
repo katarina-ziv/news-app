@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="t1_loc_login">Login</string>
+    <string name="ff_hint_inside_loc_login_ctx_mail">mail</string>
+    <string name="ff_hint_inside_loc_login_ctx_password">password</string>
+    <string name="btn_1_loc_login">login</string>
+    <string name="alert_btn_positive_loc_login">OK</string>
+    <string name="alert_loc_login_ctx_empty_mail">Mail polje je prazno</string>
+    <string name="alert_loc_login_ctx_empty_password">Password polje je prazno</string>
+    <string name="alert_loc_login_ctx_user_not_found">Korisnik nije pronađen</string>
+    <string name="alert_btn_positive_loc_debug_info">Logout</string>
+    <string name="t1_loc_general_ctx_production_environment">Produkciono okruženje</string>
+    <string name="t1_loc_general_ctx_staging_environment">Razvojno okruženje</string>
+    <string name="alert_loc_login_ctx_email_not_valid">Mail nije validan</string>
+    <string name="label_loc_general_ctx_android">Android</string>
+</resources>
