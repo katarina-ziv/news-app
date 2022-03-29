@@ -66,18 +66,18 @@ android {
         viewBinding true
     }
 
-    flavorDimensions "baseproject"
+    flavorDimensions "newsapp"
     productFlavors {
         production {
-            dimension "baseproject"
-            resValue "string", 'app_name', "\"BaseProject\""
-            buildConfigField "String", 'BASE_URL', "\"https://base-api.fabrika.me/v1/\""
+            dimension "newsapp"
+            resValue "string", 'app_name', "\"News App\""
+            buildConfigField "String", 'BASE_URL', "\"https://base-api.me/v1/\""
         }
         staging {
-            dimension "baseproject"
+            dimension "newsapp"
             applicationIdSuffix ".staging"
             versionNameSuffix "-staging"
-            resValue "string", 'app_name', "\"BaseProject Staging\""
+            resValue "string", 'app_name', "\"News App Staging\""
             buildConfigField "String", 'BASE_URL', "\"https://base-api.fabrika.me/v1/\""
         }
     }
