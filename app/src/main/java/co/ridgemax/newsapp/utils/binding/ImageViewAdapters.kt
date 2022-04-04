@@ -14,3 +14,4 @@ fun loadImage(view: ImageView, imageUrl: String?) {
 fun loadCircularImage(view: ImageView, circularImageUrl: String?, circleWidth: Float, circleColor: String){
     view.loadCircularImage(circularImageUrl, circleWidth, circleColor)
 }
+

@@ -14,7 +14,7 @@ import co.ridgemax.newsapp.activities.main.MainViewModel
 import co.ridgemax.newsapp.databinding.FragmentHomeBinding
 
 @AndroidEntryPoint
-class HomeFragment: Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val mainViewModel by activityViewModels<MainViewModel>()
