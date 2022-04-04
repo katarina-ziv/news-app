@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/shared_nav_graph"
-    tools:ignore="InvalidNavigation">
+    tools:ignore="InvalidNavigation"
+    app:startDestination="@id/breakingNewsFragment">
 
     <action android:id="@+id/action_global_to_loginFragment"
         app:popUpTo="@id/shared_nav_graph"
@@ -27,4 +28,19 @@
         android:name="co.ridgemax.newsapp.modules.auth.components.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/breakingNewsFragment"
+        android:name="co.ridgemax.newsapp.modules.article.components.breakingNews.BreakingNewsFragment"
+        android:label="fragment_breaking_news"
+        tools:layout="@layout/fragment_breaking_news" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="co.ridgemax.newsapp.modules.article.components.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="co.ridgemax.newsapp.modules.article.components.favorites.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
 </navigation>

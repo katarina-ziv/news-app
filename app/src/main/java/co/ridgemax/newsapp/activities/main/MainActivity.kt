@@ -6,7 +6,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import co.ridgemax.newsapp.R
@@ -36,7 +38,7 @@ class MainActivity : AppCompatActivity(), OnUserInteractionListener {
         lifecycleScope.launchWhenCreated {
             viewModel.user.collectLatest {
                 if (it == null) {
-                    navController.navigate(R.id.loginFragment)
+                    navController.navigate(R.id.breakingNewsFragment)
                 }
             }
         }
@@ -48,9 +50,13 @@ class MainActivity : AppCompatActivity(), OnUserInteractionListener {
         navController = navHostFragment.navController
 
         val navGraph = navController.navInflater.inflate(R.navigation.shared_nav_graph)
-        navGraph.setStartDestination(if (viewModel.isUserLoggedIn()) R.id.homeFragment else R.id.loginFragment)
+        navGraph.setStartDestination(R.id.breakingNewsFragment)
 
         navController.graph = navGraph
+
+        val bottomNavigationView = binding.bottomNavigationView
+        val navController = findNavController(R.id.fragment)
+        bottomNavigationView.setupWithNavController(navController)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {

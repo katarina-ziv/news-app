@@ -13,4 +13,12 @@
     <string name="t1_loc_general_ctx_staging_environment">Razvojno okruženje</string>
     <string name="alert_loc_login_ctx_email_not_valid">Mail nije validan</string>
     <string name="label_loc_general_ctx_android">Android</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="breaking_news_page">Breaking News</string>
+    <string name="favorites_page">Favorites</string>
+    <string name="search_hint">Search</string>
+    <string name="breaking_news">Breaking News</string>
+    <string name="favorites">Favorites</string>
+    <string name="search">Search</string>
 </resources>
