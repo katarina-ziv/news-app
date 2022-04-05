@@ -17,6 +17,11 @@ class SharedPreferences @Inject constructor(@ApplicationContext private val cont
         get() = prefs.getString(ACCESS_TOKEN, "") ?: ""
         set(value) = prefs.edit().putString(ACCESS_TOKEN, value).apply()
 
+//    var apiKey : String
+//        get() = prefs.getString(API_KEY,"")?: ""
+//        set(value) = prefs.edit().putString(API_KEY,value).apply()
+    //TODO Pitaj za API KEY
+
     var user: User?
         get() {
             val json = prefs.getString(USER, "")
@@ -31,5 +36,6 @@ class SharedPreferences @Inject constructor(@ApplicationContext private val cont
         private const val PREF_FILENAME = "me.slavzilla.baseproject.pref"
         private const val ACCESS_TOKEN = "ACCESS_TOKEN"
         private const val USER = "USER"
+        private const val API_KEY = "API_KEY"
     }
 }
