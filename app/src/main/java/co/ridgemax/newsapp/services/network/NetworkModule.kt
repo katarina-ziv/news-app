@@ -38,7 +38,7 @@ object NetworkModule {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(client)
             .build()
-            .create(NewsApi::class.java)
+            .create(ApiService::class.java)
     }
 
     @Singleton
