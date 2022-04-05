@@ -71,14 +71,14 @@ android {
         production {
             dimension "newsapp"
             resValue "string", 'app_name', "\"News App\""
-            buildConfigField "String", 'BASE_URL', "\"https://base-api.me/v1/\""
+            buildConfigField "String", 'BASE_URL', "\"https://newsapi.org\""
         }
         staging {
             dimension "newsapp"
             applicationIdSuffix ".staging"
             versionNameSuffix "-staging"
             resValue "string", 'app_name', "\"News App Staging\""
-            buildConfigField "String", 'BASE_URL', "\"https://base-api.fabrika.me/v1/\""
+            buildConfigField "String", 'BASE_URL', "\"https://newsapi.org\""
         }
     }
 
