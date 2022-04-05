@@ -7,9 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import co.ridgemax.newsapp.BuildConfig
 import co.ridgemax.newsapp.services.network.api.ApiService
-import co.ridgemax.newsapp.services.network.api.NewsApi
 import co.ridgemax.newsapp.services.persistence.SharedPreferences
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
