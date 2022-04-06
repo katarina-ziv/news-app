@@ -21,4 +21,6 @@
     <string name="breaking_news">Breaking News</string>
     <string name="favorites">Favorites</string>
     <string name="search">Search</string>
+    <string name="article_source">SOURCE</string>
+    <string name="article_title">TITLE</string>
 </resources>
