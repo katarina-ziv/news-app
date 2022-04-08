@@ -24,7 +24,7 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="409dp"

@@ -2,26 +2,26 @@ package co.ridgemax.newsapp.activities.main
 
 import android.os.Bundle
 import android.view.MotionEvent
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import co.ridgemax.newsapp.R
 import co.ridgemax.newsapp.databinding.ActivityMainBinding
 import co.ridgemax.newsapp.modules.debug.components.info.InfoDialogFragment
-import co.ridgemax.newsapp.utils.listeners.OnUserInteractionListener
+import co.ridgemax.newsapp.modules.repository.NewsRepository
+import co.ridgemax.newsapp.services.database.ArticleDatabase
 
 
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity(), OnUserInteractionListener {
+//@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel by viewModels<MainViewModel>()
+    lateinit var viewModel: ViewModel
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,18 +29,20 @@ class MainActivity : AppCompatActivity(), OnUserInteractionListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val newsRepository = NewsRepository(ArticleDatabase(this))
+        val viewModelProviderFactory = MainViewModelProviderFactory(newsRepository)
+        viewModel = ViewModelProvider(this, viewModelProviderFactory).get(MainViewModel::class.java)
+
         setupNavigation()
         observeViewModel()
+
 
     }
 
     private fun observeViewModel() {
         lifecycleScope.launchWhenCreated {
-            viewModel.user.collectLatest {
-                if (it == null) {
-                    navController.navigate(R.id.breakingNewsFragment)
-                }
-            }
+
+            navController.navigate(R.id.breakingNewsFragment)
         }
     }
 
@@ -51,11 +53,10 @@ class MainActivity : AppCompatActivity(), OnUserInteractionListener {
 
         val navGraph = navController.navInflater.inflate(R.navigation.shared_nav_graph)
         navGraph.setStartDestination(R.id.breakingNewsFragment)
-
         navController.graph = navGraph
 
         val bottomNavigationView = binding.bottomNavigationView
-        val navController = findNavController(R.id.fragment)
+       // val navController = findNavController(R.id.fragment)
         bottomNavigationView.setupWithNavController(navController)
     }
 
@@ -80,9 +81,9 @@ class MainActivity : AppCompatActivity(), OnUserInteractionListener {
         } else super.dispatchTouchEvent(ev)
     }
 
-    override fun logout() {
-        super.logout()
-    }
+//    override fun logout() {
+//        super.logout()
+//    }
 
 
 }

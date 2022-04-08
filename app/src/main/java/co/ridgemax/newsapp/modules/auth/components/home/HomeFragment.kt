@@ -30,13 +30,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            mainViewModel.user.collect {
-                it?.let {
-                    binding.homeTitle.text = it.fullName
-                }
-            }
-        }
+//
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            mainViewModel.user.collect {
+//                it?.let {
+//                    binding.homeTitle.text = it.fullName
+//                }
+//            }
+//        }
     }
 }

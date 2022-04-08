@@ -25,7 +25,7 @@ class AuthRepository @Inject constructor(
     init {
         GlobalScope.launch {
             try {
-                checkUser()
+                //checkUser()
             } catch (e: Exception) {
                 if (e is BadAccessTokenException || e is AccessTokenRequiredException) {
                     localLogout()
@@ -34,40 +34,40 @@ class AuthRepository @Inject constructor(
         }
     }
 
-    fun login(email: String, password: String) = retrieveResourceAsFlow {
-        if (netManager.isConnectedToInternet()) {
-            val response = remote.login(email, password)
-            response?.let {
-                sharedPrefs.accessToken = it.accessToken
-                sharedPrefs.user = it.data
-                _user.value = it.data
-            }
-            response?.data
-        } else {
-            throw NoInternetException()
-        }
-
-    }
-
-    private suspend fun checkUser() {
-        val userResponse = remote.checkUser()
-        userResponse?.let {
-            _user.value = it.data
-            sharedPrefs.accessToken = it.accessToken
-            sharedPrefs.user = it.data
-        }
-    }
-
-    suspend fun logout() {
-        if (netManager.isConnectedToInternet()) {
-            val response = remote.logout()
-            if (response?.statusCode == 200) {
-                localLogout()
-            }
-        } else {
-            throw NoInternetException()
-        }
-    }
+//    fun login(email: String, password: String) = retrieveResourceAsFlow {
+//        if (netManager.isConnectedToInternet()) {
+//            val response = remote.login(email, password)
+//            response?.let {
+//                sharedPrefs.accessToken = it.accessToken
+//                sharedPrefs.user = it.data
+//                _user.value = it.data
+//            }
+//            response?.data
+//        } else {
+//            throw NoInternetException()
+//        }
+//
+//    }
+//
+//    private suspend fun checkUser() {
+//        val userResponse = remote.checkUser()
+//        userResponse?.let {
+//            _user.value = it.data
+//            sharedPrefs.accessToken = it.accessToken
+//            sharedPrefs.user = it.data
+//        }
+//    }
+//
+//    suspend fun logout() {
+//        if (netManager.isConnectedToInternet()) {
+//            val response = remote.logout()
+//            if (response?.statusCode == 200) {
+//                localLogout()
+//            }
+//        } else {
+//            throw NoInternetException()
+//        }
+//    }
 
     private fun localLogout() {
         _user.value = null

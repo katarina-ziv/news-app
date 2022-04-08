@@ -12,12 +12,12 @@ class AuthRemote @Inject constructor(
     errorManager: ErrorManager
 ) : BaseRemote(errorManager) {
 
-    suspend fun login(
-        email: String,
-        password: String
-    ) = parseResult { apiService.login(email, password) }
-
-    suspend fun checkUser() = parseResult { apiService.checkUser() }
-
-    suspend fun logout() = parseResult { apiService.logout() }
+//    suspend fun login(
+//        email: String,
+//        password: String
+//    ) = parseResult { apiService.login(email, password) }
+//
+//    suspend fun checkUser() = parseResult { apiService.checkUser() }
+//
+//    suspend fun logout() = parseResult { apiService.logout() }
 }
