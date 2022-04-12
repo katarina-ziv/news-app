@@ -15,9 +15,10 @@ import co.ridgemax.newsapp.databinding.ActivityMainBinding
 import co.ridgemax.newsapp.modules.debug.components.info.InfoDialogFragment
 import co.ridgemax.newsapp.modules.repository.NewsRepository
 import co.ridgemax.newsapp.services.database.ArticleDatabase
+import dagger.hilt.android.AndroidEntryPoint
 
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNavigation() {
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
         navController = navHostFragment.navController
 
         val navGraph = navController.navInflater.inflate(R.navigation.shared_nav_graph)
