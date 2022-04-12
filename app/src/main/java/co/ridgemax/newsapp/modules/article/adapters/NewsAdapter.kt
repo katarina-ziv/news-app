@@ -1,11 +1,13 @@
 package co.ridgemax.newsapp.modules.article.adapters
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.ridgemax.newsapp.databinding.ArticlePreviewBinding
 import co.ridgemax.newsapp.modules.article.models.Article
+import com.bumptech.glide.Glide
 
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
@@ -35,10 +37,14 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     class ArticleViewHolder(private val binding: ArticlePreviewBinding) : RecyclerView.ViewHolder(binding.root)
     {
         fun bind(article: Article) {
+
             with (binding)
             {
-                tvArticleTitle.text = "nesto"
-                tvArticleSource.text = "nesto drugo"
+                Glide.with(binding.root.context)
+                    .load(article.urlToImage)
+                    .into(articleImage)
+                tvArticleTitle.text = article.title
+                tvArticleSource.text = article.source.name
             }
         }
     }

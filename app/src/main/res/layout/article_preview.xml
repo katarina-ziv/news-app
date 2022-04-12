@@ -7,11 +7,11 @@
 
     <ImageView
         android:id="@+id/articleImage"
-        android:layout_width="144dp"
-        android:layout_height="144dp"
-        android:scaleType="centerCrop"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="5dp"
         android:adjustViewBounds="true"
-        android:layout_marginStart="52dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,26 +20,30 @@
 
     <TextView
         android:id="@+id/tv_articleTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/article_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="14dp"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/tv_articleSource"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/articleImage"
-        app:layout_constraintTop_toTopOf="@id/articleImage" />
+        app:layout_constraintTop_toTopOf="@id/articleImage"
+        tools:text="This is a title"/>
 
     <TextView
         android:id="@+id/tv_articleSource"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/article_source"
+        android:layout_marginTop="10dp"
+        android:includeFontPadding="false"
+        android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@id/articleImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/tv_articleTitle"
-        app:layout_constraintTop_toBottomOf="@id/tv_articleTitle" />
+        app:layout_constraintTop_toBottomOf="@id/tv_articleTitle"
+        tools:text="Source"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
