@@ -14,9 +14,9 @@ data class Article(
     @Json(name="id")
     var id: Int? = null,
     @Json(name="author")
-    val author: String,
+    val author: String? = null,
     @Json(name="content")
-    val content: String,
+    val content: String? = null,
     @Json(name="description")
     val description: String,
     @Json(name="publishedAt")

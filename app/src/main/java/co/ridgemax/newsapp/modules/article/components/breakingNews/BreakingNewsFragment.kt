@@ -1,7 +1,6 @@
 package co.ridgemax.newsapp.modules.article.components.breakingNews
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -9,14 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.ridgemax.newsapp.R
 import co.ridgemax.newsapp.databinding.FragmentBreakingNewsBinding
-import co.ridgemax.newsapp.modules.adapters.NewsAdapter
+import co.ridgemax.newsapp.modules.article.adapters.NewsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
+class BreakingNewsFragment : Fragment() {
 
     private lateinit var binding: FragmentBreakingNewsBinding
     private val viewModel by viewModels<BreakingNewsViewModel>()
@@ -42,7 +40,6 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
         newsAdapter = NewsAdapter()
         binding.rvBreakingNews.apply {
             adapter = newsAdapter
-            layoutManager = LinearLayoutManager(activity)
         }
     }
 

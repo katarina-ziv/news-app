@@ -1,4 +1,4 @@
-package co.ridgemax.newsapp.modules.adapters
+package co.ridgemax.newsapp.modules.article.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
