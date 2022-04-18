@@ -1,5 +1,7 @@
 package co.ridgemax.newsapp.utils
 
+import java.lang.Exception
+
 sealed class Resource<T>(
     val data: T? = null,
     val message: String? = null

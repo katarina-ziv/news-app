@@ -1,7 +1,6 @@
 package co.ridgemax.newsapp.modules.article.adapters
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

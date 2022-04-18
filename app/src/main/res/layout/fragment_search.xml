@@ -6,27 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".modules.article.components.search.SearchFragment">
 
-
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/et_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:ems="10"
         android:hint="@string/search_hint"
-        android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:iconifiedByDefault = "false"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_searchNews"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextTextPersonName2" />
-
-
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="50dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@id/et_search"
+        tools:itemCount="20"
+        tools:listitem="@layout/article_preview" />
 </androidx.constraintlayout.widget.ConstraintLayout>
