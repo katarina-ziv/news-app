@@ -25,7 +25,6 @@ import javax.inject.Inject
 @HiltViewModel
 class BreakingNewsViewModel @Inject constructor(private val repository: ArticleRepository) : ViewModel()
 {
-
     private val _articlesFlow = MutableStateFlow<List<Article>>(arrayListOf())
     val articlesFlow = _articlesFlow.asSharedFlow()
 
