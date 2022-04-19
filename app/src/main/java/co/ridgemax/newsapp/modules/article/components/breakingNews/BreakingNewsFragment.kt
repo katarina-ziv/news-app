@@ -1,15 +1,18 @@
 package co.ridgemax.newsapp.modules.article.components.breakingNews
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import co.ridgemax.newsapp.R
 import co.ridgemax.newsapp.databinding.FragmentBreakingNewsBinding
 import co.ridgemax.newsapp.modules.article.adapters.NewsAdapter
 import co.ridgemax.newsapp.utils.Resource
@@ -40,6 +43,16 @@ class BreakingNewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         instantiateUi()
         observeViewModel()
+
+//        newsAdapter.setOnItemClickListener {
+//            val bundle = Bundle().apply {
+//                putSerializable("article",it)
+//            }
+//            findNavController().navigate(
+//                R.id.action_breakingNewsFragment_to_articleFragment,
+//                bundle
+//            )
+//        }
     }
 
     private fun instantiateUi()
@@ -47,6 +60,7 @@ class BreakingNewsFragment : Fragment() {
         newsAdapter = NewsAdapter()
         binding.rvBreakingNews.apply {
             adapter = newsAdapter
+
         }
     }
 
@@ -54,6 +68,7 @@ class BreakingNewsFragment : Fragment() {
     {
         lifecycleScope.launchWhenCreated {
             viewModel.articlesFlow.collectLatest {
+                Log.d("test","${it.toString()}")
                 newsAdapter.updateList(it)
             }
         }

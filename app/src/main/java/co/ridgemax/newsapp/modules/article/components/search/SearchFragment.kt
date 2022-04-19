@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import co.ridgemax.newsapp.R
 import co.ridgemax.newsapp.activities.main.MainViewModel
 import co.ridgemax.newsapp.databinding.FragmentBreakingNewsBinding
@@ -29,7 +30,7 @@ class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private val viewModel by viewModels<SearchViewModel>()
     lateinit var newsAdapter: NewsAdapter
-    val TAG = "SearchFragment "
+    val TAG = "SearchFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,10 +40,21 @@ class SearchFragment : Fragment() {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         instantiateUi()
         observeViewModel()
+
+        newsAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("article", it)
+            }
+            findNavController().navigate(
+                R.id.action_searchFragment_to_articleFragment,
+                bundle
+            )
+        }
         //delay
         var job: Job? = null
         et_search.addTextChangedListener { editable ->
@@ -50,7 +62,7 @@ class SearchFragment : Fragment() {
             job = MainScope().launch {
                 delay(SEARCH_NEWS_TIME_DELAY) //500ms
                 editable?.let {
-                    if(editable.toString().isNotEmpty()){
+                    if (editable.toString().isNotEmpty()) {
                         viewModel.searchNews(editable.toString())
                     }
                 }
@@ -58,12 +70,10 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun instantiateUi()
-    {
+    private fun instantiateUi() {
         newsAdapter = NewsAdapter()
         binding.rvSearchNews.apply {
             adapter = newsAdapter
-            layoutManager
         }
     }
 
@@ -75,4 +85,3 @@ class SearchFragment : Fragment() {
         }
     }
 }
-

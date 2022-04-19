@@ -31,12 +31,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val newsRepository = NewsRepository(ArticleDatabase(this))
-        val viewModelProviderFactory = MainViewModelProviderFactory(newsRepository)
-        viewModel = ViewModelProvider(this, viewModelProviderFactory).get(MainViewModel::class.java)
 
         setupNavigation()
         observeViewModel()
-
 
     }
 

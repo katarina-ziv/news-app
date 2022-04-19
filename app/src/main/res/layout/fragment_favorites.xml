@@ -7,18 +7,13 @@
     tools:context=".modules.article.components.favorites.FavoritesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_favoriteNews"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="61dp"
-        android:layout_height="30dp"
-        android:text="@string/favorites_page"
+        android:orientation="vertical"
+        tools:listitem="@layout/article_preview"
+        android:paddingHorizontal="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

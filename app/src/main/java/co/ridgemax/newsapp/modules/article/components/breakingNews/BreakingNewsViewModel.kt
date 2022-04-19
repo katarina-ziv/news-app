@@ -1,5 +1,6 @@
 package co.ridgemax.newsapp.modules.article.components.breakingNews
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,6 +17,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -46,6 +48,7 @@ class BreakingNewsViewModel @Inject constructor(private val repository: ArticleR
         viewModelScope.launch(handler)
         {
             repository.getArticles().collect {
+                Log.d("test","${it.toString()}")
                 if (it != null) {
                     _articlesFlow.emit(it)
                 }
@@ -55,6 +58,7 @@ class BreakingNewsViewModel @Inject constructor(private val repository: ArticleR
 
     //radi kad se stavi na kraju
     init {
+        Log.d("test","getArticle")
         getArticles()
     }
 }

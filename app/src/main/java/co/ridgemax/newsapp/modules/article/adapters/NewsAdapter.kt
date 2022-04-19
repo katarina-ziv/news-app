@@ -28,10 +28,19 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = list[position]
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let { it(article) }
+        }
         holder.bind(article)
     }
 
     override fun getItemCount() = list.size
+
+    private var onItemClickListener: ((Article) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Article) -> Unit) {
+        onItemClickListener = listener
+    }
 
     class ArticleViewHolder(private val binding: ArticlePreviewBinding) : RecyclerView.ViewHolder(binding.root)
     {
@@ -44,8 +53,8 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
                     .into(articleImage)
                 tvArticleTitle.text = article.title
                 tvArticleSource.text = article.source.name
+
             }
         }
     }
-
 }

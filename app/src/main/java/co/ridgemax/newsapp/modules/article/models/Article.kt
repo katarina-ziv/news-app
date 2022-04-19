@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.io.Serializable
 
 @Entity(
    tableName ="articles"
@@ -29,4 +30,4 @@ data class Article(
     val url: String,
     @Json(name="urlToImage")
     val urlToImage: String
-)
+) : Serializable
