@@ -1,5 +1,6 @@
 package co.ridgemax.newsapp.modules.article.servicelayer
 
+import co.ridgemax.newsapp.modules.article.models.Article
 import co.ridgemax.newsapp.services.error.ErrorManager
 import co.ridgemax.newsapp.services.network.api.ApiService
 import co.ridgemax.newsapp.services.network.api.BaseRemote
@@ -17,5 +18,7 @@ class ArticleRemote @Inject constructor(
 
     suspend fun searchNews(searchQuery : String, pageNumber: Int) =
         parseResult { apiService.search(searchQuery,pageNumber)}
+
+
 
 }

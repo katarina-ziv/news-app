@@ -15,9 +15,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="co.ridgemax.newsapp.activities.main.MainActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:theme="@style/AppTheme"
-            android:exported="true">
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

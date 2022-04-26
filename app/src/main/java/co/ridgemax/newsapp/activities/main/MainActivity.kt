@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         val navGraph = navController.navInflater.inflate(R.navigation.shared_nav_graph)
-        navGraph.setStartDestination(R.id.breakingNewsFragment)
+//        navGraph.setStartDestination(R.id.breakingNewsFragment)
         navController.graph = navGraph
 
         val bottomNavigationView = binding.bottomNavigationView
