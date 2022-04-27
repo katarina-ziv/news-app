@@ -1,13 +1,11 @@
-package co.ridgemax.newsapp.services.database
+package co.ridgemax.newsapp.services.persistence.room
 
 import android.content.Context
-import android.provider.ContactsContract
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import co.ridgemax.newsapp.activities.main.MainActivity
-import co.ridgemax.newsapp.modules.article.components.breakingNews.BreakingNewsFragment
 import co.ridgemax.newsapp.modules.article.models.Article
 
 @Database(

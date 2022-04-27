@@ -1,11 +1,10 @@
 package co.ridgemax.newsapp.modules.article.servicelayer
 
 import co.ridgemax.newsapp.modules.article.models.Article
-import co.ridgemax.newsapp.services.database.ArticleDatabase
 import co.ridgemax.newsapp.services.error.NoInternetException
 import co.ridgemax.newsapp.services.network.NetManager
 import co.ridgemax.newsapp.services.network.api.BaseRepository
-import co.ridgemax.newsapp.services.network.api.RetrofitInstance
+import co.ridgemax.newsapp.services.persistence.room.ArticleDao
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -13,7 +12,7 @@ import javax.inject.Singleton
 class ArticleRepository @Inject constructor(
     private val remote: ArticleRemote,
     private val netManager: NetManager,
-    private val db : ArticleDatabase
+    private val articleDao: ArticleDao
 ) : BaseRepository() {
 
 
@@ -33,10 +32,12 @@ class ArticleRepository @Inject constructor(
         }
     }
 
-    suspend fun upsert(article: Article) = db.getArticleDao().upsert(article)
+    suspend fun upsert(article: Article) = articleDao.upsert(article)
 
-    suspend fun delete(article:Article) = db.getArticleDao().deleteArticle(article)
+    suspend fun delete(article:Article) = articleDao.deleteArticle(article)
 
-    fun getSavedNews() = db.getArticleDao().getAllArticles()
+    fun getSavedNews() = articleDao.getAllArticles()
+
+
 
 }

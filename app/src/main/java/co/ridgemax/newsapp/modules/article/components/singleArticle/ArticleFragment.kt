@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import co.ridgemax.newsapp.R
@@ -47,6 +48,11 @@ class ArticleFragment : Fragment() {
         article_author.text = article.author
         article_content.text = article.content
 
+
+        fab_save.setOnClickListener {
+            viewModel.saveArticle(article)
+            Toast.makeText(binding.root.context,"Article saved",Toast.LENGTH_LONG).show()
+        }
     }
 }
 

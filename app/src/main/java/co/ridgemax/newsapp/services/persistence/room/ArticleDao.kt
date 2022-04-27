@@ -1,4 +1,4 @@
-package co.ridgemax.newsapp.services.database
+package co.ridgemax.newsapp.services.persistence.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

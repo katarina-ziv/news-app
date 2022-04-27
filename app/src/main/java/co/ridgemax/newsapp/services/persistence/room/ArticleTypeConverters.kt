@@ -1,8 +1,7 @@
-package co.ridgemax.newsapp.services.database
+package co.ridgemax.newsapp.services.persistence.room
 
 import androidx.room.TypeConverter
 import co.ridgemax.newsapp.modules.article.models.Source
-import java.util.*
 
 
 class ArticleTypeConverters {

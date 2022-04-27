@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import co.ridgemax.newsapp.R
 import co.ridgemax.newsapp.databinding.ActivityMainBinding
 import co.ridgemax.newsapp.modules.debug.components.info.InfoDialogFragment
 import co.ridgemax.newsapp.modules.repository.NewsRepository
-import co.ridgemax.newsapp.services.database.ArticleDatabase
+import co.ridgemax.newsapp.services.persistence.room.ArticleDatabase
 import dagger.hilt.android.AndroidEntryPoint
 
 
