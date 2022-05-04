@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
-    private val list: ArrayList<Article> = arrayListOf()
+    val list: ArrayList<Article> = arrayListOf()
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateList(newList: List<Article>) {
