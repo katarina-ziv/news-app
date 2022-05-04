@@ -11,20 +11,22 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoritesViewModel @Inject constructor(private val repository: ArticleRepository) : ViewModel() {
+class FavoritesViewModel @Inject constructor(private val repository: ArticleRepository) :
+    ViewModel() {
 
     private val _eventFlow = MutableSharedFlow<UiStates>()
     val eventFlow = _eventFlow.asSharedFlow()
 
-    private val _searchNews = MutableStateFlow<List<Article>>(arrayListOf())
-    val searchNews = _searchNews.asSharedFlow()
-    var searchNewsPage = 1
+    private val _savedNews = MutableStateFlow<List<Article>>(arrayListOf())
+    val savedNews = _savedNews.asSharedFlow()
 
-    private val handleSearchNewsResponse = CoroutineExceptionHandler { _, exception ->
+
+    private val handleSavedNewsResponse = CoroutineExceptionHandler { _, exception ->
         viewModelScope.launch {
             _eventFlow.emit(
                 when (exception) {
@@ -35,18 +37,16 @@ class FavoritesViewModel @Inject constructor(private val repository: ArticleRepo
         }
     }
 
-    fun searchNews(searchQuery: String){
-        viewModelScope.launch (handleSearchNewsResponse){
-            repository.searchNews(searchQuery, searchNewsPage).collect{
-                if(it != null){
-                    _searchNews.emit(it)
-                }
+    fun saveNews() {
+        viewModelScope.launch(handleSavedNewsResponse) {
+            repository.getSavedNews().collect {
+                _savedNews.emit(it)
             }
         }
     }
 
 
-    fun getSavedNews() = repository.getSavedNews()
+    //fun getSavedNews() = repository.getSavedNews()
 
     fun deleteArticle(article: Article) = viewModelScope.launch {
         repository.delete(article)

@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import co.ridgemax.newsapp.R
 import co.ridgemax.newsapp.activities.main.MainViewModel
 import co.ridgemax.newsapp.databinding.FragmentFavoritesBinding
@@ -26,6 +28,15 @@ class FavoritesFragment : Fragment() {
     lateinit var newsAdapter: NewsAdapter
     val TAG = "FavoritesFragment"
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentFavoritesBinding.inflate(inflater,container,false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -39,10 +50,31 @@ class FavoritesFragment : Fragment() {
                 bundle
             )
         }
+        viewModel.saveNews()
+        observeViewModel()
+        swipeToDelete()
+    }
 
-        viewModel.getSavedNews().observe(viewLifecycleOwner, Observer { articles ->
-            newsAdapter.updateList(articles)
+    private fun swipeToDelete(){
+        val itemTouchHelperCallback = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0, ItemTouchHelper.LEFT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+            }
         })
+
+        itemTouchHelperCallback.apply {
+            attachToRecyclerView(binding.rvFavoriteNews)
+        }
     }
 
 
@@ -54,15 +86,11 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-
-
-//    private fun observeViewModel() {
-//        lifecycleScope.launchWhenCreated {
-//            viewModel.getSavedNews().collectLatest {
-//                newsAdapter.updateList(it)
-//            }
-//
-//        }
-//    }
-
+    private fun observeViewModel() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.savedNews.collectLatest {
+                newsAdapter.updateList(it)
+            }
+        }
+    }
 }

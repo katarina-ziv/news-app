@@ -11,7 +11,6 @@ import androidx.navigation.ui.setupWithNavController
 import co.ridgemax.newsapp.R
 import co.ridgemax.newsapp.databinding.ActivityMainBinding
 import co.ridgemax.newsapp.modules.debug.components.info.InfoDialogFragment
-import co.ridgemax.newsapp.modules.repository.NewsRepository
 import co.ridgemax.newsapp.services.persistence.room.ArticleDatabase
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val newsRepository = NewsRepository(ArticleDatabase(this))
-
         setupNavigation()
         observeViewModel()
 
@@ -37,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeViewModel() {
         lifecycleScope.launchWhenCreated {
-
             navController.navigate(R.id.breakingNewsFragment)
         }
     }
@@ -48,11 +44,9 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         val navGraph = navController.navInflater.inflate(R.navigation.shared_nav_graph)
-//        navGraph.setStartDestination(R.id.breakingNewsFragment)
         navController.graph = navGraph
 
         val bottomNavigationView = binding.bottomNavigationView
-       // val navController = findNavController(R.id.fragment)
         bottomNavigationView.setupWithNavController(navController)
     }
 

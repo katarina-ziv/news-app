@@ -24,20 +24,20 @@ class ArticleRepository @Inject constructor(
         }
     }
 
-    fun searchNews(searchQuery: String,pageNumber: Int) = retrieveResourceAsFlow {
-        if(netManager.isConnectedToInternet()){
-            remote.searchNews(searchQuery,pageNumber)?.articles
-        }else{
+    fun searchNews(searchQuery: String, pageNumber: Int) = retrieveResourceAsFlow {
+        if (netManager.isConnectedToInternet()) {
+            remote.searchNews(searchQuery, pageNumber)?.articles
+        } else {
             throw NoInternetException()
         }
     }
 
     suspend fun upsert(article: Article) = articleDao.upsert(article)
 
-    suspend fun delete(article:Article) = articleDao.deleteArticle(article)
+    suspend fun delete(article: Article) = articleDao.deleteArticle(article)
 
-    fun getSavedNews() = articleDao.getAllArticles()
+    fun getSavedNews() = articleDao.getSavedArticles()
 
-
+    suspend fun isArticleSaved(url: String): Int = articleDao.isArticleSaved(url)
 
 }

@@ -1,8 +1,7 @@
-package co.ridgemax.newsapp.modules
+package co.ridgemax.newsapp.services.persistence.room
 
 import android.content.Context
 import androidx.room.Room
-import co.ridgemax.newsapp.services.persistence.room.ArticleDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
