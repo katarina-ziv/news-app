@@ -1,11 +1,15 @@
 package co.ridgemax.newsapp.modules.article.components.favorites
 
+import android.annotation.SuppressLint
+import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import co.ridgemax.newsapp.R
+import co.ridgemax.newsapp.activities.main.MainActivity
 import co.ridgemax.newsapp.activities.main.MainViewModel
 import co.ridgemax.newsapp.databinding.FragmentFavoritesBinding
 import co.ridgemax.newsapp.databinding.FragmentSearchBinding
@@ -25,6 +30,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import java.util.Collections.list
 
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
+
 @AndroidEntryPoint
 class FavoritesFragment : Fragment() {
 
@@ -33,7 +40,6 @@ class FavoritesFragment : Fragment() {
     private val articleViewModel by viewModels<ArticleViewModel>()
     lateinit var newsAdapter: NewsAdapter
     val TAG = "FavoritesFragment"
-    private val list: ArrayList<Article> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +59,7 @@ class FavoritesFragment : Fragment() {
                 putSerializable("article", it)
             }
             findNavController().navigate(
-                R.id.action_favoritesFragment_to_articleFragment,
+                co.ridgemax.newsapp.R.id.action_favoritesFragment_to_articleFragment,
                 bundle
             )
         }
@@ -86,13 +92,54 @@ class FavoritesFragment : Fragment() {
                         }
                     }.show()
             }
+
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+
+                RecyclerViewSwipeDecorator.Builder(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+                    .addBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.red
+                        )
+                    )
+                    .addActionIcon(R.drawable.ic_trash)
+                    .create()
+                    .decorate()
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+            }
         })
 
         itemTouchHelperCallback.apply {
             attachToRecyclerView(binding.rvFavoriteNews)
         }
-    }
 
+
+    }
 
     private fun instantiateUi() {
         newsAdapter = NewsAdapter()
@@ -100,6 +147,7 @@ class FavoritesFragment : Fragment() {
             adapter = newsAdapter
         }
     }
+
 
     private fun observeViewModel() {
         lifecycleScope.launchWhenCreated {

@@ -10,8 +10,10 @@
     <color  name="grayLight">#DADADA</color>
     <color  name="grayBackground">#F3F3F3</color>
     <color  name="white">#FFFFFF</color>
+    <color  name="red">#FF0000</color>
 
     <color name="action">#287094</color>
     <color name="success">#88AC42</color>
     <color name="error">#F03939</color>
+
 </resources>
