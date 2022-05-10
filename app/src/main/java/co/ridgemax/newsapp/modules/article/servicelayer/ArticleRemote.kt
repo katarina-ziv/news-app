@@ -26,7 +26,7 @@ class ArticleRemote @Inject constructor(
     fun fetchArticles(): Flow<PagingData<Article>> {
         // 3
         return Pager(
-            PagingConfig(pageSize = 40, enablePlaceholders = false)
+            PagingConfig(pageSize = 20, enablePlaceholders = false)
         ) {
             NewsPagingSource(apiService)
         }.flow
