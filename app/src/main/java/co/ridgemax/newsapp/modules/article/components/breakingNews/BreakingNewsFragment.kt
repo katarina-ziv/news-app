@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.ridgemax.newsapp.R
 import co.ridgemax.newsapp.databinding.FragmentBreakingNewsBinding
 import co.ridgemax.newsapp.modules.article.adapters.NewsAdapter
+import co.ridgemax.newsapp.modules.article.adapters.NewsPagingAdapter
 import co.ridgemax.newsapp.utils.Resource
 import co.ridgemax.newsapp.utils.enums.UiStates
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +28,7 @@ class BreakingNewsFragment : Fragment() {
 
     private lateinit var binding: FragmentBreakingNewsBinding
     private val viewModel by viewModels<BreakingNewsViewModel>()
-    lateinit var newsAdapter: NewsAdapter
+    lateinit var newsAdapter: NewsPagingAdapter
 
 
     override fun onCreateView(
@@ -57,7 +58,7 @@ class BreakingNewsFragment : Fragment() {
 
     private fun instantiateUi()
     {
-        newsAdapter = NewsAdapter()
+        newsAdapter = NewsPagingAdapter()
         binding.rvBreakingNews.apply {
             adapter = newsAdapter
 
@@ -66,10 +67,16 @@ class BreakingNewsFragment : Fragment() {
 
     private fun observeViewModel()
     {
+//        lifecycleScope.launchWhenCreated {
+//            viewModel.articlesFlow.collectLatest {
+//                Log.d("test","${it.toString()}")
+//                newsAdapter.updateList(it)
+//            }
+//        }
+
         lifecycleScope.launchWhenCreated {
-            viewModel.articlesFlow.collectLatest {
-                Log.d("test","${it.toString()}")
-                newsAdapter.updateList(it)
+            viewModel.fetchArticles().collectLatest { pagingData ->
+                newsAdapter.submitData(pagingData)
             }
         }
     }
