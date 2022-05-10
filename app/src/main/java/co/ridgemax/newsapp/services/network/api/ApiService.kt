@@ -32,6 +32,18 @@ interface ApiService {
         apiKey: String = Constants.API_KEY
     ) : Response<NewsResponse>
 
+    @GET("v2/top-headlines")
+    suspend fun getArticles(
+        @Query("country")
+        country: String = "us",
+        @Query("page")
+        page : Int = 1,
+        @Query("apiKey")
+        apiKey: String = Constants.API_KEY,
+        @Query("pageSize")
+        pageSize: Int = 20
+    ) : Response<NewsResponse>
+
     @GET("v2/everything")
     suspend fun search(
         @Query("q")

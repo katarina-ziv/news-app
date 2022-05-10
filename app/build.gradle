@@ -96,6 +96,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.squareup.retrofit2:retrofit:$retrofit2"
     implementation "com.squareup.retrofit2:converter-moshi:$moshi"
+    implementation 'androidx.paging:paging-common-ktx:3.1.1'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.13.0'
     implementation('com.squareup.moshi:moshi:1.13.0')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

@@ -1,10 +1,14 @@
 package co.ridgemax.newsapp.modules.article.servicelayer
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import co.ridgemax.newsapp.modules.article.models.Article
 import co.ridgemax.newsapp.services.error.NoInternetException
 import co.ridgemax.newsapp.services.network.NetManager
 import co.ridgemax.newsapp.services.network.api.BaseRepository
 import co.ridgemax.newsapp.services.persistence.room.ArticleDao
+import java.util.concurrent.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,6 +27,9 @@ class ArticleRepository @Inject constructor(
             throw NoInternetException()
         }
     }
+
+    fun fetchArticles() = remote.fetchArticles()
+
 
     fun searchNews(searchQuery: String, pageNumber: Int) = retrieveResourceAsFlow {
         if (netManager.isConnectedToInternet()) {

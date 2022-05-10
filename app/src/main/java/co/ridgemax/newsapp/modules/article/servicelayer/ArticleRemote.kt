@@ -1,10 +1,14 @@
 package co.ridgemax.newsapp.modules.article.servicelayer
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import co.ridgemax.newsapp.modules.article.models.Article
 import co.ridgemax.newsapp.services.error.ErrorManager
 import co.ridgemax.newsapp.services.network.api.ApiService
 import co.ridgemax.newsapp.services.network.api.BaseRemote
-import co.ridgemax.newsapp.services.network.api.RetrofitInstance
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -12,14 +16,20 @@ import javax.inject.Singleton
 class ArticleRemote @Inject constructor(
     private val apiService: ApiService,
     errorManager: ErrorManager
-) : BaseRemote(errorManager)
-{
+) : BaseRemote(errorManager) {
     suspend fun getArticles() = parseResult { apiService.getTopNews() }
 
-    suspend fun searchNews(searchQuery : String, pageNumber: Int) =
-        parseResult { apiService.search(searchQuery,pageNumber)}
+    suspend fun searchNews(searchQuery: String, pageNumber: Int) =
+        parseResult { apiService.search(searchQuery, pageNumber) }
 
 
-
+    fun fetchArticles(): Flow<PagingData<Article>> {
+        // 3
+        return Pager(
+            PagingConfig(pageSize = 40, enablePlaceholders = false)
+        ) {
+            NewsPagingSource(apiService)
+        }.flow
+    }
 
 }

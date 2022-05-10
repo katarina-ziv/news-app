@@ -4,6 +4,8 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import co.ridgemax.newsapp.modules.article.models.Article
 import co.ridgemax.newsapp.modules.article.models.NewsResponse
 import co.ridgemax.newsapp.modules.article.servicelayer.ArticleRepository
@@ -14,10 +16,7 @@ import co.ridgemax.newsapp.utils.enums.UiStates
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.android.synthetic.main.fragment_breaking_news.*
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -53,6 +52,10 @@ class BreakingNewsViewModel @Inject constructor(private val repository: ArticleR
                 }
             }
         }
+    }
+
+    fun fetchArticles(): Flow<PagingData<Article>> {
+        return repository.fetchArticles().cachedIn(viewModelScope)
     }
 
     //radi kad se stavi na kraju
