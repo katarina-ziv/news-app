@@ -20,7 +20,6 @@ class SharedPreferences @Inject constructor(@ApplicationContext private val cont
 //    var apiKey : String
 //        get() = prefs.getString(API_KEY,"")?: ""
 //        set(value) = prefs.edit().putString(API_KEY,value).apply()
-    //TODO Pitaj za API KEY
 
     var user: User?
         get() {

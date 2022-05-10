@@ -94,51 +94,29 @@ class FavoritesFragment : Fragment() {
             }
 
 
-            override fun onChildDraw(
-                c: Canvas,
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                dX: Float,
-                dY: Float,
-                actionState: Int,
-                isCurrentlyActive: Boolean
-            ) {
-
-                RecyclerViewSwipeDecorator.Builder(
-                    c,
-                    recyclerView,
-                    viewHolder,
-                    dX,
-                    dY,
-                    actionState,
-                    isCurrentlyActive
-                )
+            //RecyclerView Swipe decoration
+            override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int,
+                isCurrentlyActive: Boolean) {
+                RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                     .addBackgroundColor(
                         ContextCompat.getColor(
                             binding.root.context,
                             R.color.red
                         )
                     )
+                    .addSwipeLeftLabel("Delete")
                     .addActionIcon(R.drawable.ic_trash)
+                    .setSwipeLeftLabelColor(ContextCompat.getColor(binding.root.context, R.color.white))
+                    .setSwipeLeftLabelTextSize(actionState,16f)
                     .create()
                     .decorate()
-                super.onChildDraw(
-                    c,
-                    recyclerView,
-                    viewHolder,
-                    dX,
-                    dY,
-                    actionState,
-                    isCurrentlyActive
-                )
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             }
         })
 
         itemTouchHelperCallback.apply {
             attachToRecyclerView(binding.rvFavoriteNews)
         }
-
-
     }
 
     private fun instantiateUi() {
