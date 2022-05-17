@@ -11,7 +11,7 @@ import java.io.IOException
 class NewsPagingSource(
     private val apiService: ApiService,
     private val country: String = "us",
-    private val pageSize: Int = 5
+    private val pageSize: Int = 20
 ) : PagingSource<String, Article>() {
 
     private var page = 1
