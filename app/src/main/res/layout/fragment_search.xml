@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:ems="10"
+        android:maxLines="1"
         android:hint="@string/search_hint"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"

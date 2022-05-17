@@ -11,7 +11,7 @@ import java.io.IOException
 class NewsPagingSource(
     private val apiService: ApiService,
     private val country: String = "us",
-    private val pageSize: Int = 20
+    private val pageSize: Int = 5
 ) : PagingSource<String, Article>() {
 
     private var page = 1
@@ -36,7 +36,9 @@ class NewsPagingSource(
     }
 
     override fun getRefreshKey(state: PagingState<String, Article>): String? {
-        return null
+            return state.anchorPosition?.let { anchorPosition ->
+                state.closestPageToPosition(anchorPosition)?.prevKey
+            }
         //provjeriti sta je ovo sranje
     }
 

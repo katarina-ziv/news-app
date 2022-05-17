@@ -22,4 +22,5 @@
     <string name="search">Search</string>
     <string name="article_source">SOURCE</string>
     <string name="article_title">TITLE</string>
+    <string name="text_retry">Retry</string>
 </resources>

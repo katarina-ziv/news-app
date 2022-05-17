@@ -19,8 +19,8 @@ class ArticleRemote @Inject constructor(
 ) : BaseRemote(errorManager) {
     suspend fun getArticles() = parseResult { apiService.getTopNews() }
 
-    suspend fun searchNews(searchQuery: String, pageNumber: Int) =
-        parseResult { apiService.search(searchQuery, pageNumber) }
+    suspend fun searchNews(searchQuery: String, pageNumber: Int, language: String) =
+        parseResult { apiService.search(searchQuery, pageNumber, language) }
 
 
     fun fetchArticles(): Flow<PagingData<Article>> {

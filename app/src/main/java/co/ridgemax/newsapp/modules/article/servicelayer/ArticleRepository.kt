@@ -31,9 +31,9 @@ class ArticleRepository @Inject constructor(
     fun fetchArticles() = remote.fetchArticles()
 
 
-    fun searchNews(searchQuery: String, pageNumber: Int) = retrieveResourceAsFlow {
+    fun searchNews(searchQuery: String, pageNumber: Int, language: String) = retrieveResourceAsFlow {
         if (netManager.isConnectedToInternet()) {
-            remote.searchNews(searchQuery, pageNumber)?.articles
+            remote.searchNews(searchQuery, pageNumber, language)?.articles
         } else {
             throw NoInternetException()
         }

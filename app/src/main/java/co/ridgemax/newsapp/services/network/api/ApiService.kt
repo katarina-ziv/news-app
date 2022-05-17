@@ -50,6 +50,8 @@ interface ApiService {
         query: String,
         @Query("page")
         pageNo : Int = 1,
+        @Query("language")
+        country : String = "en",
         @Query("apiKey")
         apiKey: String = Constants.API_KEY
     ) : Response<NewsResponse>

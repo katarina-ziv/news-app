@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.ridgemax.newsapp.R
 import co.ridgemax.newsapp.databinding.FragmentBreakingNewsBinding
 import co.ridgemax.newsapp.modules.article.adapters.NewsAdapter
+import co.ridgemax.newsapp.modules.article.adapters.NewsLoadingAdapter
 import co.ridgemax.newsapp.modules.article.adapters.NewsPagingAdapter
 import co.ridgemax.newsapp.utils.Resource
 import co.ridgemax.newsapp.utils.enums.UiStates
@@ -60,7 +61,10 @@ class BreakingNewsFragment : Fragment() {
     {
         newsAdapter = NewsPagingAdapter()
         binding.rvBreakingNews.apply {
-            adapter = newsAdapter
+            adapter = newsAdapter.withLoadStateHeaderAndFooter(
+                header = NewsLoadingAdapter{newsAdapter.retry()},
+                footer = NewsLoadingAdapter{newsAdapter.retry()}
+            )
 
         }
     }

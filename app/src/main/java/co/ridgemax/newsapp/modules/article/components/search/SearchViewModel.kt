@@ -37,7 +37,7 @@ class SearchViewModel @Inject constructor(private val repository: ArticleReposit
 
     fun searchNews(searchQuery: String){
         viewModelScope.launch (handleSearchNewsResponse){
-            repository.searchNews(searchQuery, searchNewsPage).collect{
+            repository.searchNews(searchQuery, searchNewsPage, language = "en").collect{
                 if(it != null){
                     _searchNews.emit(it)
                 }
